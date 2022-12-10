@@ -1,0 +1,24 @@
+Based on these factors, we can design the datastore using a relational database with the following schema:
+ServiceMonitoringData:
+  - api_name (string): name of the API.
+  - user_id (integer): ID of the user making the request.
+  - request_time (datetime): timestamp of the request.
+  - response_time (integer): response time of the request in milliseconds.
+  - error_status (boolean): whether the request resulted in an error.
+
+1.
+SELECT api_name, AVG(response_time) AS avg_response_time
+FROM ServiceMonitoringData
+GROUP BY api_name
+ORDER BY avg_response_time DESC
+
+2.
+SELECT user_id, api_name, AVG(response_time) AS avg_response_time
+FROM ServiceMonitoringData
+GROUP BY user_id, api_name
+ORDER BY avg_response_time DESC
+
+3.
+SELECT api_name, request_time, SUM(error_status) / COUNT(*) AS error_percentage
+FROM ServiceMonitoringData
+GROUP BY api_name, request_time
