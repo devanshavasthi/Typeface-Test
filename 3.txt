@@ -11,14 +11,15 @@ SELECT api_name, AVG(response_time) AS avg_response_time
 FROM ServiceMonitoringData
 GROUP BY api_name
 ORDER BY avg_response_time DESC
+LIMIT 1;
 
 2.
 SELECT user_id, api_name, AVG(response_time) AS avg_response_time
 FROM ServiceMonitoringData
 GROUP BY user_id, api_name
-ORDER BY avg_response_time DESC
+ORDER BY avg_response_time DESC;
 
 3.
 SELECT api_name, request_time, SUM(error_status) / COUNT(*) AS error_percentage
 FROM ServiceMonitoringData
-GROUP BY api_name, request_time
+GROUP BY api_name, request_time;
